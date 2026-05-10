@@ -5,9 +5,9 @@ repos:
     hooks:
       - id: ruff
         args: [--fix]
-        stages: [commit]
+        stages: [pre-commit]
       - id: ruff-format
-        stages: [commit]
+        stages: [pre-commit]
 
   # Mypy for static type checking
   - repo: https://github.com/pre-commit/mirrors-mypy
@@ -19,7 +19,8 @@ repos:
           - "types-setuptools"
           - "types-requests"
           - "types-pyyaml"
-        stages: [commit]
+          - "pydantic"
+        stages: [pre-commit]
         exclude: ^(tests/|venv)
 
   # Basic pre-commit hooks
@@ -27,28 +28,28 @@ repos:
     rev: v4.5.0
     hooks:
       - id: trailing-whitespace
-        stages: [commit]
+        stages: [pre-commit]
       - id: end-of-file-fixer
-        stages: [commit]
+        stages: [pre-commit]
       - id: check-yaml
-        stages: [commit]
+        stages: [pre-commit]
       - id: check-added-large-files
         args: [--maxkb=1000]
-        stages: [commit]
+        stages: [pre-commit]
       - id: check-merge-conflict
-        stages: [commit]
+        stages: [pre-commit]
       - id: debug-statements
-        stages: [commit]
+        stages: [pre-commit]
 
   # Pytest for unit tests (optional, can be expensive)
   - repo: local
     hooks:
       - id: pytest
         name: pytest
-        entry: pytest
+        entry: uv run pytest
         language: system
         types: [python]
-        stages: [commit]
+        stages: [pre-commit]
         pass_filenames: false
         always_run: true
-        verbose: true
+        verbose: false
