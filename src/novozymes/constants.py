@@ -24,3 +24,11 @@ class HeadEnum(str, Enum):
     REGRESSION = "regression"
     CORAL = "coral"
     COGOL = "cogol"
+
+
+class StageEnum(str, Enum):
+    """Training stages."""
+
+    FIT = "fit"
+    TEST = "test"
+    PREDICT = "predict"
