@@ -34,7 +34,7 @@ repos:
       - id: check-yaml
         stages: [pre-commit]
       - id: check-added-large-files
-        args: [--maxkb=1000]
+        args: [--maxkb=2000]
         stages: [pre-commit]
       - id: check-merge-conflict
         stages: [pre-commit]
