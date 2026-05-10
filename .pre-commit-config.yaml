@@ -1,0 +1,54 @@
+repos:
+  # Ruff for linting and import sorting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.13
+    hooks:
+      - id: ruff
+        args: [--fix]
+        stages: [commit]
+      - id: ruff-format
+        stages: [commit]
+
+  # Mypy for static type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.7.1
+    hooks:
+      - id: mypy
+        args: [--strict, --ignore-missing-imports]
+        additional_dependencies:
+          - "types-setuptools"
+          - "types-requests"
+          - "types-pyyaml"
+        stages: [commit]
+        exclude: ^(tests/|venv)
+
+  # Basic pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        stages: [commit]
+      - id: end-of-file-fixer
+        stages: [commit]
+      - id: check-yaml
+        stages: [commit]
+      - id: check-added-large-files
+        args: [--maxkb=1000]
+        stages: [commit]
+      - id: check-merge-conflict
+        stages: [commit]
+      - id: debug-statements
+        stages: [commit]
+
+  # Pytest for unit tests (optional, can be expensive)
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: pytest
+        language: system
+        types: [python]
+        stages: [commit]
+        pass_filenames: false
+        always_run: true
+        verbose: true
