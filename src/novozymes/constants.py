@@ -26,6 +26,12 @@ class HeadEnum(str, Enum):
     COGOL = "cogol"
 
 
+class FeatureExtractorEnum(str, Enum):
+    """Valid feature extractors."""
+
+    ESM_EMBEDDING = "esm_embedding"
+
+
 class StageEnum(str, Enum):
     """Training stages."""
 
